@@ -1,0 +1,56 @@
+    <footer class="site-footer clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-lg-3">
+                    <h3>About</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed lacus id tortor iaculis iaculis dignissim eget justo. <br><br> Maecenas posuere eros nisl, ut pharetra turpis faucibus a. In imperdiet urna mattis lacus mollis, sit amet pulvinar purus vehicula.</p>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <h3>Tags</h3>
+                    {{#get "tags" limit="all"}}
+                        <ul class="tags">
+                            {{#foreach tags}}
+                                <li>
+                                    <a href="{{url}}">{{name}}</a>
+                                </li>
+                            {{/foreach}}
+                        </ul>
+                    {{/get}}
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <h3>Latest posts</h3>
+                    <ul class="latest-posts">
+                    {{#get "posts" include="tags, author" limit="3"}}
+                        {{#foreach posts}}
+                        <li>
+                            <h5><a href="{{url}}" title="{{title}}">{{title}}</a></h5>
+                            <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}"><i class="fas fa-calendar-alt"></i> {{date format="DD MMM YYYY"}}</time>
+                        </li>
+                        {{/foreach}}
+                    {{/get}}
+                    </ul>
+                </div>
+                {{#if @labs.subscribers}}
+                <div class="col-sm-6 col-lg-3">
+                    <h3>Newsletter</h3>
+                    <div class="subscribe-container">
+                        <p>Subscribe to our newsletter to receive our latest news.</p>
+                        {{subscribe_form
+                            form_class="gh-signin"
+                            input_class="gh-input"
+                            button_class="fas fa-angle-right"
+                            placeholder="Your email address"
+                        }}
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+        <div class="container-fluid copyright">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p>&copy; {{date format="YYYY"}}, <a href="{{@blog.url}}">{{@blog.title}}</a>. All Right Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
